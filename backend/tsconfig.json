@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "target": "es2018",
+      "module": "commonjs",
+      "lib": ["es2018", "esnext.asynciterable"],
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+
+      "composite": false,
+    "removeComments": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": false,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "rootDir": "src"
+    },
+    "exclude": ["node_modules"],
+  }
