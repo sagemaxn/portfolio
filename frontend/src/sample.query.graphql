@@ -1,0 +1,9 @@
+mutation Contact($name: String!, $email: String!, $message: String!) {
+  contactMessage(
+    messageInput: { name: $name, email: $email, message: $message }
+  ) {
+    name
+    email
+    message
+  }
+}
