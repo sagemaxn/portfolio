@@ -2,13 +2,17 @@ import '../styles/globals.css'
 
 // 1. Import `extendTheme`
 import { extendTheme } from "@chakra-ui/react"
-// 2. Call `extendTheme` and pass your custom values
-// const GridD = {
-//   baseStyle: {
-//     color: 'red',
-//     gridTemplate:  "'header header header header header header''menu main main main right right''menu footer footer footer footer footer'"
-//   }
-// }
+
+import React from 'react';
+import { render } from 'react-dom';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  useQuery,
+  gql
+} from "@apollo/client";
+
 const Button = {
   // The styles all button have in common
   baseStyle: {
@@ -56,12 +60,20 @@ const theme = extendTheme({
   },
 })
 
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/graphql',
+  cache: new InMemoryCache()
+});
+
+
 import { ChakraProvider } from "@chakra-ui/react"
 function MyApp({ Component, pageProps }) {
   return (
+    <ApolloProvider client={client}>
     <ChakraProvider theme={theme}>
       <Component {...pageProps} />
     </ChakraProvider>
+    </ApolloProvider>
   )
 }
 export default MyApp

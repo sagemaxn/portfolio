@@ -7,3 +7,7 @@ mutation Contact($name: String!, $email: String!, $message: String!) {
     message
   }
 }
+
+query Test {
+  test
+}

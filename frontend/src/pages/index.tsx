@@ -7,8 +7,6 @@ import About from "../components/About";
 import Projects from "../components/Projects"
 import Contact from '../components/Contact'
 
-import "@fontsource/dosis/600.css";
-
 export default function Home() {
   return (
     <>
@@ -17,7 +15,7 @@ export default function Home() {
         <Title />
         <About />
         <Projects />
-        {/* <Contact /> */}
+        <Contact />
       </Container>
     </>
   );

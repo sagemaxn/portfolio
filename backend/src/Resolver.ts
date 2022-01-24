@@ -22,6 +22,23 @@ export class MessageInput {
     message: string
 }
 
+const nodemailer = require('nodemailer');
+const xoauth2 = require('xoauth2')
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+          type: 'OAuth2',
+          user: process.env.EMAIL,
+          clientId: process.env.CLIENT_ID,
+          clientSecret: process.env.CLIENT_SECRET,
+          refreshToken: process.env.REFRESH_TOKEN,
+          accessToken: process.env.ACCESS_TOKEN
+}
+});
+
 @Resolver()
 export class ContactResolver {
 
@@ -31,12 +48,33 @@ export class ContactResolver {
     return b
   }
 
-  @Mutation(() => Message)
+  @Mutation(() => String)
   async contactMessage(
     @Arg('messageInput') { name, email, message } : MessageInput
   ){
-    const m = {name, email, message}
-    return m
+    var mailOptions = {
+      from: process.env.EMAIL,
+      to: process.env.EMAIL,
+      subject: `${name} ${email}`,
+      text: message
+    };
+
+    console.log( process.env.CLIENT_ID)
+    console.log(process.env.CLIENT_SECRET)
+    console.log(process.env.REFRESH_TOKEN)
+    console.log(process.env.ACCESS_TOKEN)
+  //  )
+
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+
+    return 's'
+
   }
 
 }

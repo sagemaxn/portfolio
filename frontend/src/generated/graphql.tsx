@@ -57,6 +57,14 @@ export type ContactMutation = (
   ) }
 );
 
+export type TestQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TestQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'test'>
+);
+
 
 export const ContactDocument = gql`
     mutation Contact($name: String!, $email: String!, $message: String!) {
@@ -95,3 +103,35 @@ export function useContactMutation(baseOptions?: Apollo.MutationHookOptions<Cont
 export type ContactMutationHookResult = ReturnType<typeof useContactMutation>;
 export type ContactMutationResult = Apollo.MutationResult<ContactMutation>;
 export type ContactMutationOptions = Apollo.BaseMutationOptions<ContactMutation, ContactMutationVariables>;
+export const TestDocument = gql`
+    query Test {
+  test
+}
+    `;
+
+/**
+ * __useTestQuery__
+ *
+ * To run a query within a React component, call `useTestQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTestQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTestQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTestQuery(baseOptions?: Apollo.QueryHookOptions<TestQuery, TestQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TestQuery, TestQueryVariables>(TestDocument, options);
+      }
+export function useTestLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TestQuery, TestQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TestQuery, TestQueryVariables>(TestDocument, options);
+        }
+export type TestQueryHookResult = ReturnType<typeof useTestQuery>;
+export type TestLazyQueryHookResult = ReturnType<typeof useTestLazyQuery>;
+export type TestQueryResult = Apollo.QueryResult<TestQuery, TestQueryVariables>;
