@@ -7,9 +7,9 @@ export const CustomInput = ({ label, ...props }: { [x: string]: any; name: strin
     return (
       <FormControl isInvalid={meta.touched && !!meta.error}>
         <FormLabel>
-          {label}
+         {label}
         </FormLabel>
-        <Input {...field} />
+        <Input {...field} {...props}/>
       </FormControl>
     );
 }

@@ -14,13 +14,6 @@ export type Scalars = {
   Float: number;
 };
 
-export type Message = {
-  __typename?: 'Message';
-  email: Scalars['String'];
-  message: Scalars['String'];
-  name: Scalars['String'];
-};
-
 export type MessageInput = {
   email: Scalars['String'];
   message: Scalars['String'];
@@ -29,7 +22,7 @@ export type MessageInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  contactMessage: Message;
+  contactMessage: Scalars['String'];
 };
 
 
@@ -43,18 +36,15 @@ export type Query = {
 };
 
 export type ContactMutationVariables = Exact<{
-  name: Scalars['String'];
   email: Scalars['String'];
   message: Scalars['String'];
+  name: Scalars['String'];
 }>;
 
 
 export type ContactMutation = (
   { __typename?: 'Mutation' }
-  & { contactMessage: (
-    { __typename?: 'Message' }
-    & Pick<Message, 'name' | 'email' | 'message'>
-  ) }
+  & Pick<Mutation, 'contactMessage'>
 );
 
 export type TestQueryVariables = Exact<{ [key: string]: never; }>;
@@ -67,12 +57,8 @@ export type TestQuery = (
 
 
 export const ContactDocument = gql`
-    mutation Contact($name: String!, $email: String!, $message: String!) {
-  contactMessage(messageInput: {name: $name, email: $email, message: $message}) {
-    name
-    email
-    message
-  }
+    mutation Contact($email: String!, $message: String!, $name: String!) {
+  contactMessage(messageInput: {email: $email, message: $message, name: $name})
 }
     `;
 export type ContactMutationFn = Apollo.MutationFunction<ContactMutation, ContactMutationVariables>;
@@ -90,9 +76,9 @@ export type ContactMutationFn = Apollo.MutationFunction<ContactMutation, Contact
  * @example
  * const [contactMutation, { data, loading, error }] = useContactMutation({
  *   variables: {
- *      name: // value for 'name'
  *      email: // value for 'email'
  *      message: // value for 'message'
+ *      name: // value for 'name'
  *   },
  * });
  */
