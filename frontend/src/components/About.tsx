@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import { CheckIcon } from '@chakra-ui/icons';
 
-const b = ['Javascript', 'HTML', 'CSS', 'React', 'NextJS', 'Node', 'Express', 'GraphQL', 'Chakra-UI', 'Bootstrap']
+const b = ['Javascript', 'HTML', 'CSS', 'React', 'NextJS', 'Node', 'Express', 'GraphQL', 'Apollo', 'Chakra-UI', 'Bootstrap']
 
 const features = b.map((x, i) => ( {id: i, skill: x}))
 

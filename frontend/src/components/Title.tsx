@@ -1,5 +1,5 @@
 import React from 'react'
-import {Heading, Grid} from '@chakra-ui/react'
+import {Heading, Grid, Box} from '@chakra-ui/react'
 
 const Title = () => { 
     return (
@@ -7,7 +7,7 @@ const Title = () => {
             
             <Heading  zIndex="5" gridArea="4 / 1 / 20 / 20" fontSize="80px" fontFamily="Dosis" fontWeight="bold">Sage Maxwell
             </Heading>
-            <div style={{borderRadius:"100%", backgroundColor:"#ff6961", gridArea:"2 / 7 / 12 / 7", height:"300px", width: "300px", zIndex:4}}> </div>
+            <Box style={{borderRadius:"100%", backgroundColor:"#ff6961", gridArea:"2 / 7 / 12 / 7", height:"300px", width: "300px", zIndex:4}}> </Box>
             <Heading  zIndex="5" gridArea="7 / 1 / 20 / 20" fontSize="80px" fontFamily="Dosis">Full Stack Developer</Heading>
       
       </Grid>
