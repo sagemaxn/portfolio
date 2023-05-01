@@ -54,7 +54,7 @@ const theme = extendTheme({
 });
 
 const client = new ApolloClient({
-    uri: 'http://localhost:4000/graphql',
+    uri: 'http://portfolio-backend.sagemaxn.dev/graphql',
     cache: new InMemoryCache(),
 });
 
