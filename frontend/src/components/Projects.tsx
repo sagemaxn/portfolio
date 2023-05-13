@@ -1,27 +1,42 @@
-import { Heading, Box, Image, Link, Flex } from '@chakra-ui/react'
+import { Box, Flex, Heading, Image, Link } from '@chakra-ui/react';
 
-const Project = ({image, source, demo, alt}) => {
-return <Box>
-            <Image src={image} alt={alt} w="300px"/>
+const Project = ({ image, source, alt }) => {
+    return (
+        <Box>
+            <Image alt={alt} src={image} w="300px" />
             <Flex justifyContent="space-evenly">
-            <Link href={source} isExternal>Source</Link>
-            <Link>Demo</Link>
+                <Link href={source} isExternal>
+                    Source
+                </Link>
+                <Link>Demo</Link>
             </Flex>
         </Box>
-}
-
+    );
+};
 
 const Projects = () => {
     return (
         <>
             <Heading>Projects</Heading>
             <Flex justifyContent="space-between">
-            <Project image='https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png' source='https://github.com/sagemaxn/socialmedia' demo='' alt=''/>
-            <Project image='https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png' source='' demo='' alt=''/>
-            <Project image='https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png' source='' demo='' alt=''/>
+                <Project
+                    alt=""
+                    image="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png"
+                    source="https://github.com/sagemaxn/socialmedia"
+                />
+                <Project
+                    alt=""
+                    image="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png"
+                    source=""
+                />
+                <Project
+                    alt=""
+                    image="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png"
+                    source=""
+                />
             </Flex>
         </>
-    )
-}
+    );
+};
 
-export default Projects
+export default Projects;

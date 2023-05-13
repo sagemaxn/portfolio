@@ -1,16 +1,9 @@
-import {
-    Arg,
-    Field,
-    InputType,
-    Mutation,
-    ObjectType,
-    Query,
-    Resolver,
-} from 'type-graphql';
+import {Arg, Field, InputType, Mutation, ObjectType, Query, Resolver,} from 'type-graphql';
 
 import nodemailer from 'nodemailer';
 
-import { google } from 'googleapis';
+import {google} from 'googleapis';
+
 const OAuth2 = google.auth.OAuth2;
 @ObjectType()
 export class Message {
@@ -38,9 +31,7 @@ export class MessageInput {
 export class ContactResolver {
     @Query(() => String)
     async test() {
-        const b: string;
-        b = 'f';
-        return b;
+        return 'f';
     }
 
     @Mutation(() => String)

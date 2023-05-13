@@ -1,30 +1,28 @@
-import {Flex, Button, Menu,  MenuButton,
-    MenuList,
+import {
+    Button,
+    Flex,
+    Menu,
+    MenuButton,
     MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuIcon,
-    MenuCommand,
-    MenuDivider, } from '@chakra-ui/react'
-import ChevronDownIcon from '@chakra-ui/icon'
+    MenuList,
+} from '@chakra-ui/react';
+import ChevronDownIcon from '@chakra-ui/icon';
 
 const Navbar = () => {
     return (
         <Flex flexDir="row-reverse">
-             <Menu>
-  <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-    Menu
-  </MenuButton>
-  <MenuList>
-    <MenuItem>About</MenuItem>
-    <MenuItem>Projects</MenuItem>
-    <MenuItem>Contact</MenuItem>
-
-  </MenuList>
-</Menu>
+            <Menu>
+                <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+                    Menu
+                </MenuButton>
+                <MenuList>
+                    <MenuItem>About</MenuItem>
+                    <MenuItem>Projects</MenuItem>
+                    <MenuItem>Contact</MenuItem>
+                </MenuList>
+            </Menu>
         </Flex>
-    )
-}
+    );
+};
 
-export default Navbar
+export default Navbar;

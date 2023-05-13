@@ -30,12 +30,16 @@ const main = async () => {
         cors: {
             credentials: true,
             methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
-            origin: 'https://sagemaxn.com',
+            origin: [
+                process.env.NODE_ENV === 'production'
+                    ? 'https://portfolio.sagemaxn.dev'
+                    : 'http://localhost:3000',
+            ],
         },
     });
 
     app.listen(4000, () => {
-        console.log('Server started on 4000');
+        console.log('Server started on 5000');
     });
 };
 main();

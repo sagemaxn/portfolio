@@ -3,7 +3,3 @@ mutation Contact($email: String!, $message: String!, $name: String!) {
   contactMessage(messageInput:{email: $email, message: $message, name: $name})
 
 }
-
-query Test {
-  test
-}
