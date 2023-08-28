@@ -8,12 +8,8 @@ import Contact from '../components/Contact';
 export default function Home() {
     return (
         <>
-            <Navbar></Navbar>
-            <Container
-                borderTop="black solid 10px"
-                maxW="container.lg"
-                padding="0"
-            >
+            <Navbar />
+            <Container maxW={'1200px'}>
                 <Title />
                 <About />
                 <Projects />

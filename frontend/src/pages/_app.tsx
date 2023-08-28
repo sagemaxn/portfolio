@@ -52,7 +52,10 @@ const theme = extendTheme({
         Button,
     },
 });
-const uri = process.env.NODE_ENV === 'production' ? 'http://portfolio-backend.sagemaxn.dev/graphql' : 'http://localhost:4000'
+const uri =
+    process.env.NODE_ENV === 'production'
+        ? 'https://portfolio-backend.sagemaxn.dev/graphql'
+        : 'http://localhost:4000';
 const client = new ApolloClient({
     uri,
     cache: new InMemoryCache(),
