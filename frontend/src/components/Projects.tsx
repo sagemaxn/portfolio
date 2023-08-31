@@ -1,82 +1,83 @@
-import { Box, Button, Flex, Heading, Image, Link } from '@chakra-ui/react';
-import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
-import { useState } from 'react';
+import { Box, Flex, Heading, Image, Link } from '@chakra-ui/react';
 
 const projectsData = [
     {
         alt: 'picture of forum project',
         image: '/forum.png',
         source: 'https://github.com/sagemaxn/forum',
+        demo: 'https://demo-link-forum-here.com', // You can update this link with your demo's URL.
         title: 'Forum',
     },
     {
         alt: 'Project 2',
         image: '/',
         source: '#',
+        demo: '#',
         title: 'Restaurant',
     },
     {
         alt: 'Project 3',
         image: '/',
         source: '#',
+        demo: '#',
         title: 'Wordle Clone',
     },
 ];
-const Project = ({ image, source, alt, title }) => (
-    <Box borderRadius="md" p={4} textAlign="center" width={['90%', '80%']}>
+
+const Project = ({ image, source, demo, alt, title, bgColor }) => (
+    <Box
+        bg={bgColor}
+        border="1px solid"
+        borderColor="gray.200"
+        borderRadius="md"
+        marginBottom="2rem"
+        overflow="hidden"
+        p={4}
+        textAlign="center"
+        width={'100%'}
+    >
         <Heading fontSize={['xl', '2xl']} mb={4}>
             {title}
         </Heading>
         <Image
             alt={alt}
             borderRadius="md"
+            height="250px"
             mb={4}
             objectFit="cover"
             src={image}
+            width="100%"
         />
         <Flex justifyContent="space-evenly" mt={4}>
-            <Link href={source} isExternal>
+            <Link
+                color="blue.600"
+                href={source}
+                isExternal
+                textDecoration="none"
+            >
                 Source
             </Link>
-            <Link>Demo</Link>
+            <Link color="blue.600" href={demo} isExternal textDecoration="none">
+                Demo
+            </Link>
         </Flex>
     </Box>
 );
 
 const Projects = () => {
-    const [current, setCurrent] = useState(0);
-
-    const prevProject = () => {
-        setCurrent(current === 0 ? projectsData.length - 1 : current - 1);
-    };
-
-    const nextProject = () => {
-        setCurrent(current === projectsData.length - 1 ? 0 : current + 1);
-    };
+    const colors = ['gray.100', 'white', 'gray.200'];
 
     return (
-        <Box mt={8} textAlign="center">
+        <Box mt={8} textAlign="center" w={'100%'}>
             <Heading mb={4}>Projects</Heading>
-            <Flex
-                alignItems="center"
-                justifyContent="center"
-                position="relative"
-            >
-                <Button
-                    left="0"
-                    leftIcon={<FiArrowLeft />}
-                    onClick={prevProject}
-                    position="absolute"
-                    zIndex="1"
-                />
-                <Project {...projectsData[current]} />
-                <Button
-                    onClick={nextProject}
-                    position="absolute"
-                    right="0"
-                    rightIcon={<FiArrowRight />}
-                    zIndex="1"
-                />
+            <Flex alignItems="center" flexDirection="column">
+                {projectsData.map((project, index) => (
+                    <Project
+                        bgColor={colors[index % colors.length]}
+                        key={index}
+                        {...project}
+                    />
+                ))}
             </Flex>
         </Box>
     );

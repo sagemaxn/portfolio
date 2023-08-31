@@ -12,6 +12,8 @@ export default function Home() {
             <Container maxW={'1200px'}>
                 <Title />
                 <About />
+                {/*<Skills id="skills" />{' '}*/}
+                {/* Assuming you have a Skills component. */}
                 <Projects />
                 <Contact />
             </Container>
