@@ -9,14 +9,10 @@ export default function Home() {
     return (
         <>
             <Navbar />
-            <Container maxW={'1200px'}>
-                <Title />
-                <About />
-                {/*<Skills id="skills" />{' '}*/}
-                {/* Assuming you have a Skills component. */}
-                <Projects />
-                <Contact />
-            </Container>
+            <Title />
+            <About />
+            <Projects />
+            <Contact />
         </>
     );
 }

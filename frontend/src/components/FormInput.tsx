@@ -14,7 +14,7 @@ export const CustomInput = ({ label, ...props }: Props): JSX.Element => {
     return (
         <FormControl isInvalid={meta.touched && !!meta.error}>
             <FormLabel>{label}</FormLabel>
-            <Input {...field} {...props} />
+            <Input {...field} {...props}/>
         </FormControl>
     );
 };

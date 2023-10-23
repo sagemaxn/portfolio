@@ -1,45 +1,60 @@
-import * as Express from 'express';
 import 'reflect-metadata';
-import { ApolloServer } from 'apollo-server-express';
+import { expressMiddleware } from '@apollo/server/express4';
+import * as Express from 'express';
+import * as cors from 'cors';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
+import * as http from 'http';
+import { ApolloServer } from '@apollo/server';
 import { buildSchema } from 'type-graphql';
-
 import { ContactResolver } from './src/Resolver';
-
 import { config } from 'dotenv';
+import { json } from 'body-parser';
 
 config();
 
-const app = Express();
+interface MyContext {
+    req: Express.Request;
+    res: Express.Response;
+    token?: string;
+}
 
 const main = async () => {
+    const app = Express();
+
     const schema = await buildSchema({
-        resolvers: [ContactResolver],
-        //emitSchemaFile: true
+        resolvers: [ContactResolver]
     });
-    const apolloServer = new ApolloServer({
+
+    const httpServer = http.createServer(app);
+
+    const server = new ApolloServer<MyContext>({
         schema,
-        context: async ({ req, res }) => {
-            return { res, req, payload: 'asd' };
-        },
+        plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+        introspection: true,
     });
 
-    await apolloServer.start();
+    await server.start();
 
-    apolloServer.applyMiddleware({
-        app,
-        cors: {
-            credentials: true,
-            methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
-            origin: [
-                process.env.NODE_ENV === 'production'
-                    ? 'https://sagemaxn.dev'
-                    : 'http://localhost:3000',
-            ],
-        },
-    });
+    app.use(
+        '/graphql',
+        cors(),
+        json(),
+        expressMiddleware(server, {
+            context: async ({ req, res }) => ({
+                req,
+                res,
+                token: req.headers.token
+            })
+        })
+    );
 
-    app.listen(4000, () => {
-        console.log('Server started on 4000');
-    });
+
+    await new Promise<void>(resolve =>
+        httpServer.listen({ port: process.env.PORT || 4000 }, resolve),
+    );
+    console.log('Server ready at http://localhost:4000/graphql');
 };
-main();
+
+main().catch(error => {
+    console.error(error);
+});

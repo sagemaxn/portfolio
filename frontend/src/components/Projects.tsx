@@ -1,74 +1,74 @@
-import { Box, Flex, Heading, Image, Link } from '@chakra-ui/react';
+import { Box, Flex, Heading, Image, Link, Spacer, Button, Text, Center } from '@chakra-ui/react';
 
 const projectsData = [
     {
-        alt: 'picture of forum project',
-        image: '/forum.png',
-        source: 'https://github.com/sagemaxn/forum',
-        demo: 'https://demo-link-forum-here.com', // You can update this link with your demo's URL.
         title: 'Forum',
+        description: 'A forum built with NextJS, Apollo, TypeGraphQL and Chakra UI. Users can create an account and then login to browse. Change your avatar to preset options and make your own threads or posts!',
+        image: '/forum.png',
+        alt: 'picture of forum project',
+        source: 'https://github.com/sagemaxn/forum',
+        demo: 'https://demo-link-forum-here.com',
     },
     {
-        alt: 'Project 2',
-        image: '/',
-        source: '#',
-        demo: '#',
         title: 'Restaurant',
-    },
-    {
-        alt: 'Project 3',
-        image: '/',
+        description: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsum',
+        image: '/forum.png',
+        alt: 'Project 2',
         source: '#',
         demo: '#',
+    },
+    {
         title: 'Wordle Clone',
+        description: 'lorem ipsum lorem ipsum lorem ipsum lorem lorem ipsum lorem ipsum lorem lorem ipsum lorem ipsum lorem lorem ipsum lorem ipsum lorem lorem ipsum lorem ipsum lorem',
+        alt: 'Project 3',
+        image: '/forum.png',
+        source: '#',
+        demo: '#',
     },
 ];
 
-const Project = ({ image, source, demo, alt, title, bgColor }) => (
-    <Box
-        bg={bgColor}
-        border="1px solid"
-        borderColor="gray.200"
-        borderRadius="md"
-        marginBottom="2rem"
-        overflow="hidden"
-        p={4}
-        textAlign="center"
-        width={'100%'}
-    >
-        <Heading fontSize={['xl', '2xl']} mb={4}>
-            {title}
-        </Heading>
-        <Image
-            alt={alt}
-            borderRadius="md"
-            height="250px"
-            mb={4}
-            objectFit="cover"
-            src={image}
-            width="100%"
-        />
-        <Flex justifyContent="space-evenly" mt={4}>
-            <Link
-                color="blue.600"
-                href={source}
-                isExternal
-                textDecoration="none"
-            >
-                Source
-            </Link>
-            <Link color="blue.600" href={demo} isExternal textDecoration="none">
-                Demo
-            </Link>
-        </Flex>
-    </Box>
-);
+const Project = ({ source, description, image, title, alt, demo }) => {
+    return (
+        <Center borderWidth="1px" m={3} p={5} shadow="md" w="100%" >
+            <Box w={'1000px'}>
+            <Flex direction="row">
+                <Image
+                    w="500px"
+                    src={image}
+                    alt={alt}
+                    mr={6}
+                />
+                <Box>
+                    <Text fontSize="xl" fontWeight="bold">
+                        {title}
+                    </Text>
+                    <Text mt={4}>{description}</Text>
+                    <Spacer />
+                    <Flex mt={4} direction="row">
+                        <Link href={demo} isExternal>
+                            <Button mr={3}>
+                                Demo
+                            </Button>
+                        </Link>
+                        <Link href={source} isExternal>
+                            <Button>
+                                Source
+                            </Button>
+                        </Link>
+                    </Flex>
+                </Box>
+            </Flex>
+            </Box>
+        </Center>
+    );
+};
+
 
 const Projects = () => {
-    const colors = ['gray.100', 'white', 'gray.200'];
+    const colors = ['gray.200', 'white', 'gray.200'];
 
     return (
-        <Box mt={8} textAlign="center" w={'100%'}>
+        <Box id={'projects'} mt={8} textAlign="center" w={'100%'}>
             <Heading mb={4}>Projects</Heading>
             <Flex alignItems="center" flexDirection="column">
                 {projectsData.map((project, index) => (

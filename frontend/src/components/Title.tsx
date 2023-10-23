@@ -6,15 +6,15 @@ const Title = () => {
     return (
         <Flex
             alignItems="center"
-            bgColor="#ff6961"
+            bgColor="#0F172A"
             justifyContent="space-around"
             p={6}
         >
             <Box>
-                <Heading fontFamily="Dosis" fontSize="80px" mb={4} zIndex="5">
+                <Heading fontFamily="Dosis" fontSize="80px" mb={4} zIndex="5" color={'white'}>
                     Sage Maxwell
                 </Heading>
-                <Heading fontFamily="Dosis" fontSize="80px" zIndex="5">
+                <Heading fontFamily="Dosis" fontSize="50px" zIndex="5" color={'white'}>
                     Full Stack Developer
                 </Heading>
             </Box>
@@ -24,7 +24,7 @@ const Title = () => {
                     height={250}
                     objectFit="cover"
                     src="/path_to_your_portrait.jpg"
-                    width={250} // adjust dimensions as required
+                    width={250}
                 />
             </Box>
         </Flex>

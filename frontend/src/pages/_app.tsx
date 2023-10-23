@@ -1,32 +1,28 @@
 import '../styles/globals.css';
 
-// 1. Import `extendTheme`
 import { extendTheme } from '@chakra-ui/react';
 
 import React from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 const Button = {
-    // The styles all button have in common
     baseStyle: {
         fontWeight: 'bold',
         textTransform: 'uppercase',
-        borderRadius: 'base', // <-- border radius is same for all variants and sizes
+        borderRadius: 'base',
     },
-    // Two sizes: sm and md
     sizes: {
         sm: {
             fontSize: 'sm',
-            px: 4, // <-- px is short for paddingLeft and paddingRight
-            py: 3, // <-- py is short for paddingTop and paddingBottom
+            px: 4,
+            py: 3,
         },
         md: {
             fontSize: 'md',
-            px: 6, // <-- these values are tokens from the design system
-            py: 4, // <-- these values are tokens from the design system
+            px: 6,
+            py: 4,
         },
     },
-    // Two variants: outline and solid
     variants: {
         outline: {
             border: '2px solid',
@@ -36,11 +32,8 @@ const Button = {
         solid: {
             bg: '#white',
             color: '#black',
-            //#ff8547 orangey
-            //"#ff6961" pastel red
         },
     },
-    // The default size and variant values
     defaultProps: {
         size: 'md',
         variant: 'solid',
@@ -55,7 +48,7 @@ const theme = extendTheme({
 const uri =
     process.env.NODE_ENV === 'production'
         ? 'https://portfolio-backend.sagemaxn.dev/graphql'
-        : 'http://localhost:4000';
+        : 'http://localhost:4000/graphql';
 const client = new ApolloClient({
     uri,
     cache: new InMemoryCache(),

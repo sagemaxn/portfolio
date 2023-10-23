@@ -23,7 +23,6 @@
         },
         "plugins": ["react"],
         "rules": {
-                "no-console": "warn",
                 "dot-notation": "error",
                 "no-else-return": "error",
                 "no-floating-decimal": "error",

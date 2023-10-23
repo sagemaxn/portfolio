@@ -1,10 +1,16 @@
-import {Arg, Field, InputType, Mutation, ObjectType, Query, Resolver,} from 'type-graphql';
+import { google } from 'googleapis';
+import {
+    Arg,
+    Field,
+    InputType,
+    Mutation,
+    ObjectType,
+    Query,
+    Resolver,
+} from 'type-graphql';
 
-import nodemailer from 'nodemailer';
+const { gmail } = google;
 
-import {google} from 'googleapis';
-
-const OAuth2 = google.auth.OAuth2;
 @ObjectType()
 export class Message {
     @Field(() => String)
@@ -31,54 +37,54 @@ export class MessageInput {
 export class ContactResolver {
     @Query(() => String)
     async test() {
-        return 'f';
+        return 'the server is running';
     }
 
     @Mutation(() => String)
     async contactMessage(
         @Arg('messageInput') { name, email, message }: MessageInput,
     ) {
-        if (!name) {
-            name = '';
-        }
-        const mailOptions = {
-            from: process.env.EMAIL,
-            to: process.env.EMAIL,
-            subject: `${name} ${email}`,
-            text: message,
-        };
-
-        const oauth2Client = new OAuth2(
+        const oauth2Client = new google.auth.OAuth2(
             process.env.CLIENT_ID,
             process.env.CLIENT_SECRET,
-            'https://developers.google.com/oauthplayground',
+            process.env.REDIRECT_URI,
         );
 
         oauth2Client.setCredentials({
             refresh_token: process.env.REFRESH_TOKEN,
         });
-        const accessToken = oauth2Client.getAccessToken();
 
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                type: 'OAuth2',
-                user: 'sagemaxn@gmail.com',
-                clientId: process.env.CLIENT_ID,
-                clientSecret: process.env.CLIENT_SECRET,
-                refreshToken: process.env.REFRESH_TOKEN,
-                accessToken: accessToken,
-            },
-            tls: {
-                rejectUnauthorized: false,
-            },
-        });
+        const gmailClient = gmail({ version: 'v1', auth: oauth2Client });
+        //due to low traffic I will simply have my own email send a message to itself with the information
+        const rawEmail = Buffer.from(
+            `Subject: ${name} ${email}\r\n` +
+                `To: ${process.env.EMAIL}\r\n` +
+                `From: ${process.env.EMAIL}\r\n\r\n` +
+                `email: ${email} \n
+                message: ${message}`,
+        )
+            .toString('base64')
+            .replace(/\+/g, '-')
+            .replace(/\//g, '_');
 
-        transporter.sendMail(mailOptions, function (error, info) {
-            error ? console.log(error) : console.log(info.response);
-            transporter.close();
-        });
-
-        return 's';
+        try {
+            const response = await gmailClient.users.messages.send({
+                userId: 'me',
+                requestBody: {
+                    raw: rawEmail,
+                },
+            });
+            console.log('Message sent:', response.data);
+            return 'Email sent successfully';
+        } catch (error) {
+            //a log to hopefully still track some intended info in case of bug
+            console.error('Error sending email', {
+                name: name,
+                email: email,
+                message: message,
+                error: error,
+            });
+            return 'Failed to send email';
+        }
     }
 }

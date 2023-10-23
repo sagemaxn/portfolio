@@ -1,6 +1,7 @@
 import React from 'react';
 import {
     Box,
+    Container,
     Heading,
     Icon,
     Link,
@@ -29,29 +30,27 @@ const skills = [
 
 export default function About() {
     return (
-        <Box id={'about'} p={8}>
+        <Container id={'about'} maxWidth={'1200px'}>
             <Stack spacing={6}>
                 <Heading fontSize={'3xl'}>About Me</Heading>
                 <Text color={'gray.600'} fontSize={'xl'}>
                     My name is Sage Maxwell. I am a self taught web developer
                     with a passion for computers and trying not to be too
-                    hyperfixated on what I'm currently learning. When I was a
-                    teenager I played around with Python but after some soul
+                    hyperfixated on what I'm currently learning. Over a decade ago I played around with coding but after some soul
                     searching and figuring out what I want to do, I made my way
-                    back to programming. Were you ever told as a kid that you
+                    back to it. Were you ever told as a kid that you
                     could "do anything"? Talk about confusing. <br />
                     Originally I learned frontend work only with a focus on
                     React, but expanded to learning Node.js with Express and
-                    Graphql. This has further cemented my understanding of how
-                    to interact with APIs and made me a better frontend
-                    developer for it. I owe what I know to great resources such
+                    Graphql. This has further cemented my understanding of programming and made me a better
+                    developer all around. I owe what I know to great resources such
                     as{' '}
                     <Link href={'https://www.theodinproject.com/'}>
-                        The Odin Project
+                        <b>The Odin Project</b>
                     </Link>{' '}
                     and{' '}
                     <Link href={'https://fullstackopen.com/en/'}>
-                        Fullstackopen
+                        <b>Full Stack Open</b>
                     </Link>
                     .
                 </Text>
@@ -67,7 +66,7 @@ export default function About() {
                             _hover={{
                                 transform: 'scale(1.05)',
                                 boxShadow: 'md',
-                            }} // Hover effect added
+                            }}
                             alignItems="center"
                             bg="gray.100"
                             borderRadius="md"
@@ -88,6 +87,6 @@ export default function About() {
                     ))}
                 </SimpleGrid>
             </Box>
-        </Box>
+        </Container>
     );
 }

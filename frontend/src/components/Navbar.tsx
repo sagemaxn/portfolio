@@ -1,5 +1,5 @@
 import { Box, Flex, Icon, Link, Spacer } from '@chakra-ui/react';
-import { FaGithub } from 'react-icons/fa'; // First, make sure to install react-icons
+import { FaGithub } from 'react-icons/fa';
 
 const Navbar = () => {
     const handleScroll = sectionId => {
@@ -19,9 +19,7 @@ const Navbar = () => {
             top="0"
             zIndex="100"
         >
-            <Box fontSize="xl" fontWeight="bold">
-                Sage Maxwell
-            </Box>
+            <Box fontWeight={'bold'}>sagemaxn@gmail.com</Box>
             <Spacer />
             <Box
                 cursor="pointer"
@@ -52,7 +50,7 @@ const Navbar = () => {
                 Contact
             </Box>
             <Link
-                href="https://github.com/your_username_here"
+                href="https://github.com/sagemaxn"
                 isExternal
                 marginLeft="1rem"
             >
