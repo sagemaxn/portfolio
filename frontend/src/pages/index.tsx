@@ -1,4 +1,3 @@
-import { Container } from '@chakra-ui/react';
 import Title from '../components/Title';
 import Navbar from '../components/Navbar';
 import About from '../components/About';

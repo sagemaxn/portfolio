@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { expressMiddleware } from '@apollo/server/express4';
-import * as Express from 'express';
+import * as express from 'express';
 import * as cors from 'cors';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import * as http from 'http';
@@ -19,10 +19,10 @@ interface MyContext {
 }
 
 const main = async () => {
-    const app = Express();
+    const app = express();
 
     const schema = await buildSchema({
-        resolvers: [ContactResolver]
+        resolvers: [ContactResolver],
     });
 
     const httpServer = http.createServer(app);
@@ -43,11 +43,10 @@ const main = async () => {
             context: async ({ req, res }) => ({
                 req,
                 res,
-                token: req.headers.token
-            })
-        })
+                token: req.headers.token,
+            }),
+        }),
     );
-
 
     await new Promise<void>(resolve =>
         httpServer.listen({ port: process.env.PORT || 4000 }, resolve),

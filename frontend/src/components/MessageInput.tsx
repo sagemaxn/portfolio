@@ -6,6 +6,7 @@ interface Props {
     name: string;
     required?: boolean;
     type?: string;
+    placeholder: string;
 }
 
 export const MessageInput = ({ label, ...props }: Props): JSX.Element => {

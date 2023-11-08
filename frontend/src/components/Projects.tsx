@@ -1,68 +1,94 @@
-import { Box, Flex, Heading, Image, Link, Spacer, Button, Text, Center } from '@chakra-ui/react';
+import {
+    Box,
+    Button,
+    Center,
+    Flex,
+    Heading,
+    Image,
+    Link,
+    Stack,
+    StackDirection,
+    Text,
+    useBreakpointValue,
+} from '@chakra-ui/react';
 
 const projectsData = [
     {
         title: 'Forum',
-        description: 'A forum built with NextJS, Apollo, TypeGraphQL and Chakra UI. Users can create an account and then login to browse. Change your avatar to preset options and make your own threads or posts!',
-        image: '/forum.png',
-        alt: 'picture of forum project',
+        description:
+            'An internet forum for nothing in particular. Post about whatever you want to. Features user authentication, customizable avatars, and pagination amongst other things.',
+        image: '/images/forum.png',
+        alt: 'Screenshot of my forum project',
         source: 'https://github.com/sagemaxn/forum',
-        demo: 'https://demo-link-forum-here.com',
+        demo: 'forum.sagemaxn.dev',
     },
     {
-        title: 'Restaurant',
-        description: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsum',
-        image: '/forum.png',
-        alt: 'Project 2',
-        source: '#',
-        demo: '#',
+        title: 'Portfolio',
+        description:
+            'This website! A portfolio to introduce myself and show off a few projects. It allows the user to contact me through a form that will email me with nodemailer.',
+        image: '/images/portfolio.png',
+        alt: 'Screenshot of this website',
+        source: '',
+        demo: 'sagemaxn.dev',
     },
     {
         title: 'Wordle Clone',
-        description: 'lorem ipsum lorem ipsum lorem ipsum lorem lorem ipsum lorem ipsum lorem lorem ipsum lorem ipsum lorem lorem ipsum lorem ipsum lorem lorem ipsum lorem ipsum lorem',
-        alt: 'Project 3',
-        image: '/forum.png',
-        source: '#',
-        demo: '#',
+        description:
+            'This is a clone of Wordle. Each day at midnight EST a new word will be randomly selected for the game.',
+        alt: 'Screenshot of my Wordle clone',
+        image: '/images/wordle.png',
+        source: 'https://github.com/sagemaxn/wordle-clone',
+        demo: 'wordle.sagemaxn.dev',
     },
 ];
 
-const Project = ({ source, description, image, title, alt, demo }) => {
+const Project = ({ source, description, image, title, alt, demo, bgColor }) => {
+    const stackDirection = useBreakpointValue({
+        base: 'column',
+        md: 'row',
+    }) as StackDirection;
+    const imageSize = useBreakpointValue({ base: '100%', md: '500px' });
+
     return (
-        <Center borderWidth="1px" m={3} p={5} shadow="md" w="100%" >
-            <Box w={'1000px'}>
-            <Flex direction="row">
-                <Image
-                    w="500px"
-                    src={image}
-                    alt={alt}
-                    mr={6}
-                />
+        <Center
+            backgroundColor={bgColor}
+            borderWidth="1px"
+            m={3}
+            p={5}
+            shadow="md"
+            w="full"
+        >
+            <Stack
+                direction={stackDirection}
+                maxW={'1000px'}
+                spacing={6}
+                w="full"
+            >
+                <Image alt={alt} src={image} w={imageSize} />
                 <Box>
                     <Text fontSize="xl" fontWeight="bold">
                         {title}
                     </Text>
                     <Text mt={4}>{description}</Text>
-                    <Spacer />
-                    <Flex mt={4} direction="row">
-                        <Link href={demo} isExternal>
-                            <Button mr={3}>
-                                Demo
-                            </Button>
-                        </Link>
+                    <Stack
+                        direction={{ base: 'column', sm: 'row' }}
+                        mt={4}
+                        spacing={3}
+                    >
                         <Link href={source} isExternal>
-                            <Button>
-                                Source
-                            </Button>
+                            <Button>Source</Button>
                         </Link>
-                    </Flex>
+                        {demo && (
+                            <Link href={`https://${demo}`} isExternal>
+                                <Button>Demo</Button>
+                            </Link>
+                        )}
+                    </Stack>
                 </Box>
-            </Flex>
-            </Box>
+            </Stack>
         </Center>
     );
 };
-
 
 const Projects = () => {
     const colors = ['gray.200', 'white', 'gray.200'];

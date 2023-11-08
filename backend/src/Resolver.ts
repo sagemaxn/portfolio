@@ -1,4 +1,4 @@
-import { google } from 'googleapis';
+import * as nodemailer from 'nodemailer';
 import {
     Arg,
     Field,
@@ -8,8 +8,6 @@ import {
     Query,
     Resolver,
 } from 'type-graphql';
-
-const { gmail } = google;
 
 @ObjectType()
 export class Message {
@@ -44,45 +42,31 @@ export class ContactResolver {
     async contactMessage(
         @Arg('messageInput') { name, email, message }: MessageInput,
     ) {
-        const oauth2Client = new google.auth.OAuth2(
-            process.env.CLIENT_ID,
-            process.env.CLIENT_SECRET,
-            process.env.REDIRECT_URI,
-        );
-
-        oauth2Client.setCredentials({
-            refresh_token: process.env.REFRESH_TOKEN,
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.SENDING_EMAIL,
+                pass: process.env.PASSWORD,
+            },
         });
 
-        const gmailClient = gmail({ version: 'v1', auth: oauth2Client });
-        //due to low traffic I will simply have my own email send a message to itself with the information
-        const rawEmail = Buffer.from(
-            `Subject: ${name} ${email}\r\n` +
-                `To: ${process.env.EMAIL}\r\n` +
-                `From: ${process.env.EMAIL}\r\n\r\n` +
-                `email: ${email} \n
-                message: ${message}`,
-        )
-            .toString('base64')
-            .replace(/\+/g, '-')
-            .replace(/\//g, '_');
+        const mailOptions = {
+            from: process.env.SENDING_EMAIL,
+            to: process.env.RECEIVING_EMAIL,
+            subject: `${name} ${email}`,
+            text: `email: ${email}\nmessage: ${message}`,
+        };
 
         try {
-            const response = await gmailClient.users.messages.send({
-                userId: 'me',
-                requestBody: {
-                    raw: rawEmail,
-                },
-            });
-            console.log('Message sent:', response.data);
+            const response = await transporter.sendMail(mailOptions);
+            console.log('Message sent:', response);
             return 'Email sent successfully';
         } catch (error) {
-            //a log to hopefully still track some intended info in case of bug
             console.error('Error sending email', {
-                name: name,
-                email: email,
-                message: message,
-                error: error,
+                name,
+                email,
+                message,
+                error,
             });
             return 'Failed to send email';
         }

@@ -1,102 +1,106 @@
 import React from 'react';
 import { Form, Formik } from 'formik';
-import {
-    Button,
-    Container,
-    Flex,
-    Heading,
-    Box,
-    useColorModeValue,
-} from '@chakra-ui/react';
+import { Box, Button, Heading, useToast, VStack } from '@chakra-ui/react';
 import { CustomInput } from './FormInput';
 import { MessageInput } from './MessageInput';
 import { useContactMutation } from '../generated/graphql';
 
 function Contact() {
     const [contact] = useContactMutation();
-    const buttonBg = useColorModeValue('blue.600', 'blue.300');
-    const buttonHoverBg = useColorModeValue('blue.700', 'blue.200');
-    const inputFocusBorderColor = useColorModeValue('blue.600', 'blue.300');
-    const containerBg = useColorModeValue('gray.100', 'gray.700');
+    const toast = useToast();
 
     return (
-        <Flex
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            mt={6}
+        <Box
+            bg={'blue'}
+            borderRadius="lg"
+            boxShadow="md"
             color={'white'}
+            id={'contact'}
+            m={6}
+            maxWidth="1200px"
+            mx="auto"
+            p={6}
+            w={'full'}
         >
-            <Box
-                bg={'#0F172A'}
-                borderRadius="lg"
-                boxShadow="md"
-                flexDirection="column"
-                id={'contact'}
-                p={6}
-                maxWidth={'1200px'}
-                width={'100%'}
-                m="auto"
+            <Heading mb={6} textAlign="center">
+                Contact Me
+            </Heading>
+            <Formik
+                initialValues={{ name: '', email: '', message: '' }}
+                onSubmit={async (values, { setSubmitting, resetForm }) => {
+                    try {
+                        const response = await contact({
+                            variables: values,
+                        });
+                        if (
+                            response.data?.contactMessage ===
+                            'Email sent successfully'
+                        ) {
+                            toast({
+                                title: 'Success',
+                                description:
+                                    'Your message has been sent successfully!',
+                                status: 'success',
+                                duration: 5000,
+                                isClosable: true,
+                            });
+                            resetForm();
+                        } else {
+                            toast({
+                                title: 'Error',
+                                description:
+                                    'Failed to send your message. Please try again later.',
+                                status: 'error',
+                                duration: 5000,
+                                isClosable: true,
+                            });
+                        }
+                    } catch (error) {
+                        toast({
+                            title: 'Error',
+                            description:
+                                'An unexpected error occurred. Please try again later.',
+                            status: 'error',
+                            duration: 5000,
+                            isClosable: true,
+                        });
+                        console.error('Error sending message', error);
+                    }
+                    setSubmitting(false);
+                }}
             >
-                <Heading mb={6} textAlign="center">
-                    Contact Me
-                </Heading>
-                <Formik
-                    initialValues={{ name: '', email: '', message: '' }}
-                    onSubmit={async (values, actions) => {
-                        await contact({ variables: values });
-                        actions.setSubmitting(false);
-                    }}
-                >
-                    {props => (
-                        <Form>
-                            <Flex flexDirection="column" alignItems="center" justifyContent="center">
-
-                                <Box width="70%" mb={4}>
-                                    <CustomInput
-                                        focusBorderColor={inputFocusBorderColor}
-                                        label="name"
-                                        name="name"
-                                    />
-                                </Box>
-
-                                <Box width="70%" mb={4}>
-                                    <CustomInput
-                                        focusBorderColor={inputFocusBorderColor}
-                                        label="email"
-                                        name="email"
-                                        required={true}
-                                        type="email"
-                                    />
-                                </Box>
-
-                                <Box width="70%" mb={4}>
-                                    <MessageInput
-                                        focusBorderColor={inputFocusBorderColor}
-                                        label="message"
-                                        name="message"
-                                        required={true}
-                                    />
-                                </Box>
-
-                                <Button
-                                    _hover={{
-                                        bg: buttonHoverBg,
-                                    }}
-                                    bg={buttonBg}
-                                    isLoading={props.isSubmitting}
-                                    mt={4}
-                                    type="submit"
-                                >
-                                    Send Message
-                                </Button>
-                            </Flex>
-                        </Form>
-                    )}
-                </Formik>
-            </Box>
-        </Flex>
+                {props => (
+                    <Form>
+                        <VStack align="stretch" spacing={4}>
+                            <CustomInput
+                                label="name"
+                                name="name"
+                                placeholder="Enter your name"
+                            />
+                            <CustomInput
+                                label="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                type="email"
+                            />
+                            <MessageInput
+                                label="message"
+                                name="message"
+                                placeholder="Enter your message"
+                            />
+                            <Button
+                                colorScheme="whiteAlpha"
+                                isLoading={props.isSubmitting}
+                                type="submit"
+                                width="full"
+                            >
+                                Send Message
+                            </Button>
+                        </VStack>
+                    </Form>
+                )}
+            </Formik>
+        </Box>
     );
 }
-
 export default Contact;

@@ -41,6 +41,9 @@ const Button = {
 };
 
 const theme = extendTheme({
+    colors: {
+        blue: '#0F172A',
+    },
     components: {
         Button,
     },
