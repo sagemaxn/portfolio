@@ -28,7 +28,7 @@ const projectsData = [
             'This website! A portfolio to introduce myself and show off a few projects. It allows the user to contact me through a form that will email me with nodemailer.',
         image: '/images/portfolio.png',
         alt: 'Screenshot of this website',
-        source: '',
+        source: 'https://github.com/sagemaxn/portfolio',
         demo: 'sagemaxn.dev',
     },
     {

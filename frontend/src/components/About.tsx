@@ -41,17 +41,19 @@ export default function About() {
                 <Heading fontSize={headingFontSize}>About Me</Heading>
                 <Text color={'gray.600'} fontSize={textFontSize}>
                     My name is Sage Maxwell. I&apos;m a self-taught web
-                    developer with a passion for computers and trying not to be
-                    too hyperfixated on what I&apos;m currently learning. Over a
-                    decade decade ago I played around with coding but after some
-                    soul searching and figuring out what I want to do, I made my
-                    way back to it. Were you ever told as a kid that you could
-                    &quot;do anything&quot;? Talk about confusing. <br />
-                    Originally I learned frontend work only with a focus on
-                    React, but expanded to learning Node.js with Express and
-                    GraphQL. This has further cemented my understanding of
-                    programming and made me a better developer all around. I owe
-                    what I know to great resources such as{' '}
+                    developer with a passion for computers. The reality of being
+                    self taught is using the plethora of information that is
+                    available to anyone, but having the commitment and
+                    dedication to learn for yourself. Over a decade decade ago I
+                    played around with coding but after some soul searching and
+                    figuring out what I want to do, I made my way back to it.
+                    Were you ever told as a kid that you could &quot;do
+                    anything&quot;? Talk about confusing. <br />
+                    Originally I learned frontend work only, but expanded to
+                    learning the backend with Node.js, Express, and GraphQL.
+                    This has further cemented my understanding of programming
+                    and made me a better developer all around. I owe what I know
+                    to great resources such as{' '}
                     <Link href={'https://www.theodinproject.com/'} isExternal>
                         <b>The Odin Project</b>
                     </Link>{' '}
