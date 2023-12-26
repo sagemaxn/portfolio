@@ -24,6 +24,8 @@ const skills = [
     'Apollo',
     'MongoDB',
     'Mongoose',
+    'SQL',
+    'MySQL',
     'Chakra-UI',
     'Bootstrap',
     'Linux',
