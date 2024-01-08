@@ -13,10 +13,11 @@ import {
 import { CheckIcon } from '@chakra-ui/icons';
 
 const skills = [
-    'Javascript',
+    'JavaScript',
     'HTML',
     'CSS',
     'React',
+    'TypeScript',
     'NextJS',
     'Node',
     'Express',
@@ -25,7 +26,7 @@ const skills = [
     'MongoDB',
     'Mongoose',
     'SQL',
-    'MySQL',
+    'PostgreSQL',
     'Chakra-UI',
     'Bootstrap',
     'Linux',
