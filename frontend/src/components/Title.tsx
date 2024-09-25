@@ -1,67 +1,47 @@
-import React from 'react';
-import { Box, Flex, Heading } from '@chakra-ui/react';
+import { useState } from 'react';
+import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react';
 
+const info = {
+    Developer:
+        'a developer with a passion for computers. I owe what I know to great resources such as The Odin Project and Full Stack Open. Along the way, I decided to pursue a computer science degree, which has made me a better developer all around.',
+    Plant: 'a European perennial mint (Salvia officinalis) with grayish-green aromatic leaves used especially in flavoring meats. Merriam Webster Dictionary',
+};
 const Title = () => {
+    const [toggle, setToggle] = useState(true);
+    const handleClick = () => {
+        setToggle(!toggle);
+    };
+
     return (
         <Flex
-            alignItems="center"
-            bgColor="blue"
-            flexDirection={['column', 'row']}
-            justifyContent={['center', 'space-around']}
-            p={[4, 6]}
+            flexDirection={['column', 'column', 'row']}
+            justifyContent={['space-between']}
         >
-            <Box mb={[4, 4, 0]} textAlign={['center', 'center', 'left']}>
+            <Flex
+                flexDirection={'column'}
+                justifyContent={'center'}
+                padding={['50px 0', '100px 0', '200px 0']}
+            >
                 <Heading
-                    color={'white'}
                     fontFamily="Dosis"
                     fontSize={['4xl', '6xl', '80px']}
                     mb={4}
-                    zIndex="5"
+                    zIndex="1"
                 >
-                    Sage Maxwell
+                    Sage is...
                 </Heading>
-                <Heading
-                    color={'white'}
-                    fontFamily="Dosis"
-                    fontSize={['2xl', '3xl', '50px']}
-                    zIndex="5"
-                >
-                    Full Stack Developer
-                </Heading>
-            </Box>
-            <Box
-                height={['100px', '150px', 'auto']}
-                position="relative"
-                width={['200px', '200px', 'auto']}
-            >
-                <Box
-                    bg="white"
-                    borderRadius="full"
-                    boxShadow="xl"
-                    h={['100px', '150px', '200px']} // Smaller circle on smaller screens
-                    left="50%"
-                    position="absolute"
-                    top="50%"
-                    transform="translate(-50%, -50%)"
-                    w={['100px', '150px', '200px']} // Smaller circle on smaller screens
-                />
-                <Box
-                    bg="blue"
-                    borderRadius="full"
-                    h={['100px', '150px', '200px']} // Smaller circle on smaller screens
-                    left={['60%']} // Adjust position for responsiveness
-                    position="absolute"
-                    top="50%"
-                    transform={[
-                        'translate(-50%, -50%)',
-                        'translate(-50%, -50%)',
-                        'translate(-30%, -50%)',
-                    ]}
-                    w={['100px', '150px', '200px']} // Smaller circle on smaller screens
-                />
-            </Box>
+                <Box cursor="pointer" onClick={handleClick}>
+                    <Text
+                        fontFamily="Dosis"
+                        fontSize={['1xl', '2xl', '3xl']}
+                        zIndex="5"
+                    >
+                        {toggle ? info.Developer : info.Plant}
+                    </Text>
+                </Box>
+            </Flex>
+            <Image src={'/images/laptop.svg'}></Image>
         </Flex>
     );
 };
-
 export default Title;

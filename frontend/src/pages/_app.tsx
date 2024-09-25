@@ -1,7 +1,5 @@
 import '../styles/globals.css';
-
 import { extendTheme } from '@chakra-ui/react';
-
 import React from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
@@ -36,7 +34,6 @@ const Button = {
     },
     defaultProps: {
         size: 'md',
-        variant: 'solid',
     },
 };
 
@@ -44,10 +41,19 @@ const theme = extendTheme({
     colors: {
         blue: '#0F172A',
     },
+    styles: {
+        global: {
+            body: {
+                bg: '#F5F5DC',
+                color: '#0F172A',
+            },
+        },
+    },
     components: {
         Button,
     },
 });
+
 const uri =
     process.env.NODE_ENV === 'production'
         ? 'https://portfolio-backend.sagemaxn.dev/graphql'
@@ -67,4 +73,5 @@ function MyApp({ Component, pageProps }) {
         </ApolloProvider>
     );
 }
+
 export default MyApp;

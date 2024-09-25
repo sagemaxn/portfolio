@@ -1,17 +1,18 @@
 import Title from '../components/Title';
 import Navbar from '../components/Navbar';
-import About from '../components/About';
 import Projects from '../components/Projects';
 import Contact from '../components/Contact';
+import { Container } from '@chakra-ui/react';
 
 export default function Home() {
     return (
         <>
             <Navbar />
-            <Title />
-            <About />
-            <Projects />
-            <Contact />
+            <Container maxW={'6xl'}>
+                <Title />
+                <Projects />
+                <Contact />
+            </Container>
         </>
     );
 }

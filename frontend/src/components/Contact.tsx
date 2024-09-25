@@ -11,10 +11,8 @@ function Contact() {
 
     return (
         <Box
-            bg={'blue'}
             borderRadius="lg"
             boxShadow="md"
-            color={'white'}
             id={'contact'}
             m={6}
             maxWidth="1200px"
@@ -89,10 +87,11 @@ function Contact() {
                                 placeholder="Enter your message"
                             />
                             <Button
-                                colorScheme="whiteAlpha"
+                                bg={'white'}
+                                borderWidth={'2px'}
                                 isLoading={props.isSubmitting}
                                 type="submit"
-                                width="full"
+                                width="md"
                             >
                                 Send Message
                             </Button>

@@ -18,7 +18,7 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 const Navbar = () => {
     const navbarRef = useRef(null);
     const isWideVersion = useBreakpointValue({ base: false, md: true });
-    const handleScroll = sectionId => {
+    const handleScroll = (sectionId: string) => {
         if (sectionId === 'about') {
             window.scrollTo({
                 top: 0,
@@ -41,8 +41,6 @@ const Navbar = () => {
     return (
         <Flex
             alignItems="center"
-            bg={'white'}
-            boxShadow="sm"
             padding="1rem"
             position="sticky"
             ref={navbarRef}
@@ -91,6 +89,7 @@ const Navbar = () => {
                         borderColor={'black'}
                         color={'black'}
                         icon={<HamburgerIcon />}
+                        id="menu-button"
                         variant="outline"
                     />
                     <MenuList>
