@@ -1,4 +1,4 @@
-import Title from '../components/Title';
+import About from '../components/About';
 import Navbar from '../components/Navbar';
 import Projects from '../components/Projects';
 import Contact from '../components/Contact';
@@ -9,7 +9,7 @@ export default function Home() {
         <>
             <Navbar />
             <Container maxW={'6xl'}>
-                <Title />
+                <About />
                 <Projects />
                 <Contact />
             </Container>

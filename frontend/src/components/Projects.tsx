@@ -7,7 +7,6 @@ import {
     Image,
     Link,
     Stack,
-    StackDirection,
     Text,
     useBreakpointValue,
 } from '@chakra-ui/react';
@@ -43,44 +42,50 @@ const projectsData = [
 ];
 
 const Project = ({ source, description, image, title, alt, demo, bgColor }) => {
-    const stackDirection = useBreakpointValue({
-        base: 'column',
-        md: 'row',
-    }) as StackDirection;
-    const imageSize = useBreakpointValue({ base: '100%', md: '500px' });
-
     return (
         <Center
-            backgroundColor={bgColor}
-            borderWidth="1px"
-            m={3}
-            p={5}
-            shadow="md"
+            bg={bgColor}
+            borderRadius="lg"
+            boxShadow="lg"
+            m={[4, 6]}
+            p={[4, 6, 8]}
             w="full"
         >
             <Stack
-                direction={stackDirection}
-                maxW={'1000px'}
-                spacing={6}
+                align="center"
+                direction={['column', 'column', 'row']}
+                maxW="1000px"
+                spacing={[4, 6, 8]}
                 w="full"
             >
-                <Image alt={alt} src={image} w={imageSize} />
+                <Image
+                    alt={alt}
+                    borderRadius="md"
+                    src={image}
+                    w={['100%', '75%', '50%']}
+                />
                 <Box>
-                    <Text fontSize="xl" fontWeight="bold">
+                    <Text fontSize={['lg', 'xl']} fontWeight="bold" mb={2}>
                         {title}
                     </Text>
-                    <Text mt={4}>{description}</Text>
+                    <Text fontSize={['sm', 'md']} mb={4}>
+                        {description}
+                    </Text>
                     <Stack
-                        direction={{ base: 'column', sm: 'row' }}
-                        mt={4}
+                        direction={'row-reverse'}
+                        justifyContent={{ base: 'center', sm: 'flex-start' }}
                         spacing={3}
                     >
                         <Link href={source} isExternal>
-                            <Button>Source</Button>
+                            <Button variant="outline" w={'100px'}>
+                                Source
+                            </Button>
                         </Link>
                         {demo && (
                             <Link href={`https://${demo}`} isExternal>
-                                <Button>Demo</Button>
+                                <Button variant="outline" w={'100px'}>
+                                    Demo
+                                </Button>
                             </Link>
                         )}
                     </Stack>
@@ -91,12 +96,14 @@ const Project = ({ source, description, image, title, alt, demo, bgColor }) => {
 };
 
 const Projects = () => {
-    const colors = ['gray.200', 'white', 'gray.200'];
+    const colors = ['#DAD0ED', '#F0F4C3', '#FFCDD2'];
 
     return (
-        <Box id={'projects'} mt={8} textAlign="center" w={'100%'}>
-            <Heading mb={4}>Projects</Heading>
-            <Flex alignItems="center" flexDirection="column">
+        <Box id="projects" py={[8, 12]} textAlign="center" w="full">
+            <Heading fontSize={['2xl', '3xl', '4xl']} mb={8}>
+                Projects
+            </Heading>
+            <Flex align="center" direction="column">
                 {projectsData.map((project, index) => (
                     <Project
                         bgColor={colors[index % colors.length]}

@@ -23,9 +23,7 @@ const Button = {
     },
     variants: {
         outline: {
-            border: '2px solid',
-            borderColor: 'red.200',
-            color: 'red.200',
+            border: '1px solid'
         },
         solid: {
             bg: '#white',
@@ -44,7 +42,9 @@ const theme = extendTheme({
     styles: {
         global: {
             body: {
+                //beige
                 bg: '#F5F5DC',
+                //a kind of dark blue
                 color: '#0F172A',
             },
         },
