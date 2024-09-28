@@ -10,47 +10,62 @@ const Button = {
         borderRadius: 'base',
     },
     sizes: {
-        sm: {
-            fontSize: 'sm',
-            px: 4,
-            py: 3,
-        },
         md: {
             fontSize: 'md',
-            px: 6,
-            py: 4,
+        },
+        lg: {
+            fontSize: 'lg',
         },
     },
     variants: {
-        outline: {
-            border: '1px solid'
-        },
         solid: {
-            bg: '#white',
-            color: '#black',
+            bg: 'darkP',
+            color: 'beige',
+            _hover: {
+                bg: 'purple',
+            },
         },
     },
     defaultProps: {
-        size: 'md',
+        size: 'lg',
+        variant: 'solid',
     },
 };
 
 const theme = extendTheme({
     colors: {
-        blue: '#0F172A',
+        beige: '#F5F5DC',
+        purple: '#9F87AF',
+        darkP: '#592E83',
+        brown: '#533E2D',
     },
     styles: {
         global: {
             body: {
-                //beige
-                bg: '#F5F5DC',
-                //a kind of dark blue
-                color: '#0F172A',
+                bg: 'beige',
+                color: 'darkP',
+            },
+            '*, *::before, *::after': {
+                margin: 0,
+                padding: 0,
+                boxSizing: 'border-box',
             },
         },
     },
+    space: {
+        // Define consistent spacing values
+        xs: '1em',
+        sm: '2em',
+        md: '4em',
+        lg: '6em',
+        xl: '8em',
+    },
     components: {
         Button,
+        Text: {
+            color: 'black',
+            fontWeight: 'medium',
+        },
     },
 });
 

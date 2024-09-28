@@ -2,6 +2,7 @@ import { useCallback, useRef } from 'react';
 import {
     Box,
     Flex,
+    HStack,
     Icon,
     IconButton,
     Link,
@@ -46,14 +47,18 @@ const Navbar = () => {
     return (
         <Flex
             alignItems="center"
-            bg="#F5F5DC"
-            padding="1rem"
+            bg="purple"
+            color={'beige'}
+            fontSize={['md', 'lg', 'xl']}
+            padding={'xs'}
             position="sticky"
             ref={navbarRef}
             top="0"
-            zIndex="100"
+            zIndex={5}
         >
-            <Box fontWeight={'bold'}>sagemaxn@gmail.com</Box>
+            <Box fontWeight={'bold'} mx={[0, 'sm']}>
+                sagemaxn@gmail.com
+            </Box>
             <Spacer />
             {displayFullBar ? (
                 <FullBar handleScroll={handleScroll} />
@@ -65,24 +70,20 @@ const Navbar = () => {
 };
 
 const FullBar = ({ handleScroll }) => (
-    <>
-        <Box cursor="pointer" ml="1rem" onClick={() => handleScroll('about')}>
+    <HStack gap={'sm'} mx={'sm'}>
+        <Box cursor="pointer" onClick={() => handleScroll('about')}>
             About
         </Box>
-        <Box
-            cursor="pointer"
-            ml="1rem"
-            onClick={() => handleScroll('projects')}
-        >
+        <Box cursor="pointer" onClick={() => handleScroll('projects')}>
             Projects
         </Box>
-        <Box cursor="pointer" ml="1rem" onClick={() => handleScroll('contact')}>
+        <Box cursor="pointer" onClick={() => handleScroll('contact')}>
             Contact
         </Box>
-        <Link href="https://github.com/sagemaxn" isExternal ml="1rem">
-            <Icon as={FaGithub} boxSize={6} />
+        <Link href="https://github.com/sagemaxn" isExternal>
+            <Icon as={FaGithub} boxSize={9} />
         </Link>
-    </>
+    </HStack>
 );
 
 const Hamburger = ({ handleScroll }) => (
@@ -90,11 +91,12 @@ const Hamburger = ({ handleScroll }) => (
         <MenuButton
             aria-label="Options"
             as={IconButton}
+            bg={'purple'}
             color={'black'}
             icon={<HamburgerIcon />}
-            variant="outline"
+            mx={[0, 'sm']}
         />
-        <MenuList>
+        <MenuList color={'darkP'}>
             <MenuItem onClick={() => handleScroll('about')}>About</MenuItem>
             <MenuItem onClick={() => handleScroll('projects')}>
                 Projects

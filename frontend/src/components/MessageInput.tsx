@@ -14,7 +14,7 @@ export const MessageInput = ({ label, ...props }: Props): JSX.Element => {
 
     return (
         <FormControl isInvalid={meta.touched && !!meta.error}>
-            <FormLabel>{label}</FormLabel>
+            <FormLabel fontSize={'xl'}>{label}</FormLabel>
             <Textarea {...field} {...props} background={'white'} />
         </FormControl>
     );
